@@ -1,6 +1,6 @@
-# jay
+# jsonx
 
-A simple package that wraps JSON in `[]byte` form to provide methods on detecting the content as well as Marshaling/Unmarshaling.
+A simple library that offers some tooling for working with JSON in go.
 
 
 ## License 
