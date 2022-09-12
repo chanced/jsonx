@@ -27,8 +27,6 @@ func NewDecoder(r io.Reader) *json.Decoder {
 	return json.NewDecoder(r)
 }
 
-type Number = json.Number
-
 type RawMessage []byte
 
 func (d RawMessage) Len() int {
