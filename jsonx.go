@@ -88,8 +88,21 @@ var hex = "0123456789abcdef"
 // EncodeString encodes a string to a json string literal, escaping any
 // characters that are not permitted.
 //
+// EncodeString calls EncodeAndWriteString with a bytes.Buffer and returns the
+// result.
+//
 // Logic taken from encoding/json
-func EncodeString(w Writer, s []byte) {
+func EncodeString[S ~string](s S) []byte {
+	b := bytes.Buffer{}
+	EncodeAndWriteString(&b, []byte(s))
+	return b.Bytes()
+}
+
+// EncodeAndWriteString encodes a string to a json string literal, escaping any
+// characters that are not permitted. It then writes the result to w.
+//
+// Logic taken from encoding/json
+func EncodeAndWriteString(w Writer, s []byte) {
 	escapeHTML := true
 	w.WriteByte('"')
 	start := 0
