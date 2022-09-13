@@ -94,7 +94,7 @@ var hex = "0123456789abcdef"
 // Logic taken from encoding/json
 func EncodeString[S ~string](s S) []byte {
 	b := bytes.Buffer{}
-	EncodeAndWriteString(&b, []byte(s), true)
+	EncodeAndWriteString(&b, []byte(s))
 	return b.Bytes()
 }
 
@@ -102,7 +102,15 @@ func EncodeString[S ~string](s S) []byte {
 // characters that are not permitted. It then writes the result to w.
 //
 // Logic taken from encoding/json
-func EncodeAndWriteString(w Writer, s []byte, escapeHTML bool) {
+func EncodeAndWriteString(w Writer, s []byte) {
+	encodeAndWriteString(w, s, true)
+}
+
+func EncodeAndWriteStringWithoutHTMLEscape(w Writer, s []byte) {
+	encodeAndWriteString(w, s, false)
+}
+
+func encodeAndWriteString(w Writer, s []byte, escapeHTML bool) {
 	w.WriteByte('"')
 	start := 0
 	for i := 0; i < len(s); {
