@@ -22,7 +22,7 @@ func TestEncodeString(t *testing.T) {
 	}
 	b := bytes.Buffer{}
 
-	jsonx.EncodeAndWriteString(&b, []byte(str))
+	jsonx.EncodeAndWriteString(&b, str)
 	if b.String() != string(expected) {
 		t.Errorf("expected %s, got %s", expected, b.String())
 	}
